@@ -3,20 +3,27 @@ import React from 'react';
 class SearchBar extends React.Component {
     state = {term: ''};
     // onInputChange is an event call back in the class so use arrow function to avoid errors
-    onInputChange = () => {
+    onInputChange = (event) => {
+        this.setState({term: event.target.value});
+    };
 
+    onFormSubmit = (event) => {
+        event.preventDefault(); // prevent's the default application to refresh
+
+        // TODO: Make sure we call
+        // callback from parent component
     };
 
     render() {
         return (
             <div className="search-bar ui segment">
-                <form className="ui form">
+                <form onSubmit = {this.onFormSubmit} className="ui form">
                     <div className="field">
                         <label>Video Search</label>
                         <input 
                             type="text" 
                             value={this.state.term} 
-                            onChange = {this.onInputChange} // onChange is special you have to use it for event change
+                            onChange = {this.onInputChange} // onChange is special event handler so have to use it for event change
                         />
                     </div>
                 </form>
