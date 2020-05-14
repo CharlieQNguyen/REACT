@@ -2,11 +2,16 @@ import React from 'react';
 import SearchBar from './SearchBar';
 import youtube from '../apis/youtube';
 import VideoList from './VideoList';
+import VideoDetail from './VideoDetail';
 
 const KEY = "AIzaSyBg31ZJsfw_mvc5Hx5s3URa2yujHRLBcPQ";
 
 class App extends React.Component {
-    state = { videos: [] };
+    state = { videos: [], selectedVideo: null };
+
+    componentDidMount() {
+        this.onTermSubmit('buildings'); //what it will originally load before we even search aka default
+    }
 
     onTermSubmit = async (term) => {
 
@@ -19,14 +24,33 @@ class App extends React.Component {
                 key: KEY
             }
         });
-        this.setState({videos: response.data.items});
+        this.setState({
+            videos: response.data.items,
+            selectedVideo: response.data.items[0] // when new video is search we will see the first video
+        });
+    }
+
+    onVideoSelect = (video) => { // video object is what we fetch from youtube API this method is a callback 
+        this.setState({ selectedVideo: video });
     }
 
     render() {
         return (
             <div className="ui container">
                 <SearchBar onFormSubmit={this.onTermSubmit}/>
-                <VideoList videos={this.state.videos}/>
+                <div className="ui grid">
+                    <div className="ui row">
+                        <div className="eleven wide column">
+                            <VideoDetail video={this.state.selectedVideo}/> 
+                        </div>
+                        <div className="five wide column">
+                            <VideoList 
+                                onVideoSelect ={this.onVideoSelect} 
+                                videos={this.state.videos} //passing on a video list
+                            />
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }
