@@ -27,10 +27,9 @@ class SongList extends React.Component {
 }
 
 const mapStateToProps = (state) => { // state passed in is all the data in our redux store
-    console.log(state);
     return { songs: state.songs}
 }
 
 export default connect(mapStateToProps, {
-    selectSong: selectSong
+    selectSong: selectSong // passing in action creater into the connect function, it will automatically use the dispatch function
 })(SongList);
