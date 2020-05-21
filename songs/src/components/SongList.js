@@ -1,3 +1,4 @@
+// this page is the connector 
 import React from 'react';
 import { connect } from 'react-redux';
 import { selectSong } from '../actions';
@@ -21,12 +22,12 @@ class SongList extends React.Component {
         });
     }
     render() {
-        console.log(this.props)
         return <div className="ui divided list">{this.renderList()}</div>;
     }
 }
 
 const mapStateToProps = (state) => { // state passed in is all the data in our redux store
+    console.log(state);
     return { songs: state.songs}
 }
 
