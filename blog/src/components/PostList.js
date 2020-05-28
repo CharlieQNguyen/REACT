@@ -12,6 +12,10 @@ class PostList extends React.Component {
     }
 }
 
+const mapStateToProps = (state) => {
+
+}
+
 export default connect(
     null, 
     { fetchPosts: fetchPosts}
