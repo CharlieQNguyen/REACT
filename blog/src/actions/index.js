@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import jsonPlaceholder from '../apis/jsonPlaceholder';
 
 // action creater to fetch all posts
@@ -13,3 +14,10 @@ export const fetchUser = (id) => async dispatch => {
 
         dispatch({ type: 'FETCH_USER', payload: response.data });
 };
+
+// const _fetchUser = _.memoize(async (id, dispatch) => { //memoize version 
+//   // memoize to call it one time to use in fetchUser function
+//   const response = await jsonPlaceholder.get(`/users/${id}`); //(`/users/${id}`) is 2015 js syntax is same as ('/users/' + id)
+
+//   dispatch({ type: "FETCH_USER", payload: response.data });
+// });
