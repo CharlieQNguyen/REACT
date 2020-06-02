@@ -6,6 +6,12 @@ export const fetchPostsAndUsers = () => async (dispatch, getState) => {
 
         const userIds = _.uniq(_.map(getState().posts, 'userId')) // getting all the posts in an array with unique userId
         userIds.forEach(id => dispatch(fetchUser(id))) //for each id we are going to call the fetchuser and dispatch 
+
+        // ._chain(getState().posts)
+        //         .map('userId')
+        //         .uniq()
+        //         .forEach(id => dispatch(fetchUser(id)))
+        //         .value()
 }
 
 // action creater to fetch all posts
